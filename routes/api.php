@@ -18,7 +18,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//for a user
+Route::group(['middleware' => 'auth:sanctum'], function(){
+    //All secure URL's
+
+    //For a User
+    Route::put("userUpdate",[UserController::class,'update']);
+
+    Route::get("Getuser",[UserController::class,'Getuser']); 
+
+});
+
+      //for a user
 Route::post("userSignup",[UserController::class,'userRegister']);
 
 Route::post("userSignin",[UserController::class,'login']);
